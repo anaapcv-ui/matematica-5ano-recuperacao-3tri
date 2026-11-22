@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usina da Reciclagem — Recuperação de Matemática 5º ano (3º trimestre)</title>
+<style>
+:root{
+  --mar:#2E7D52; --mar-claro:#E0F3E7; --laranja:#E2642A; --amarelo:#F2B21A;
+  --bom:#189E7C; --alerta:#E05A2B; --fundo:#F6FBFD; --papel:#FFFFFF;
+  --tinta:#17313D; --cinza:#6F8795; --borda:#D6E8DC;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',Verdana,sans-serif;background:var(--fundo);color:var(--tinta);font-size:17px;line-height:1.6}
+.wrap{max-width:940px;margin:0 auto;padding:16px}
+header{background:linear-gradient(160deg,#2E7D52,#62BC8C);color:#fff;border-radius:0 0 26px 26px;padding:22px 16px 26px;text-align:center}
+header h1{margin:0 0 6px;font-size:1.6rem}
+header p{margin:4px 0;opacity:.95}
+.mascote{font-size:3rem;line-height:1;display:block;margin-bottom:4px}
+.badge{display:inline-block;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.5);padding:4px 14px;border-radius:999px;font-weight:bold;font-size:.9rem;margin-top:8px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 10px}
+nav button{background:var(--papel);border:3px solid var(--borda);border-radius:16px;padding:10px 14px;font-size:1rem;font-weight:bold;color:var(--tinta);cursor:pointer;font-family:inherit}
+nav button:hover{border-color:var(--mar)}
+nav button.on{background:var(--mar);border-color:var(--mar);color:#fff}
+nav button .mini{display:block;font-size:.72rem;font-weight:normal;opacity:.85}
+section{display:none}
+section.on{display:block}
+.card{background:var(--papel);border:3px solid var(--borda);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 3px 0 rgba(46,125,82,.07)}
+.card h2{margin:0 0 6px;font-size:1.3rem;color:var(--mar)}
+.card h3{margin:14px 0 6px;font-size:1.08rem}
+.intro{background:var(--mar-claro);border-color:#BEE0CB}
+.pill .tema{font-weight:bold;font-size:1.1rem;color:var(--mar);margin-bottom:4px}
+.pill .regra{margin:6px 0}
+.pill .ex{background:#FFF6E0;border-left:6px solid var(--amarelo);border-radius:10px;padding:8px 12px;margin:8px 0}
+.pill .prova{background:#E6F6F1;border-left:6px solid var(--bom);border-radius:10px;padding:8px 12px;margin:8px 0}
+.pill .prova b{color:#126B54}
+.grupo{font-size:1.15rem;font-weight:bold;background:var(--amarelo);color:#4A3200;display:inline-block;padding:5px 16px;border-radius:999px;margin:18px 0 2px}
+.q{border-top:2px dashed var(--borda);padding-top:12px;margin-top:12px}
+.q:first-of-type{border-top:0}
+.q .enun{font-weight:bold;margin-bottom:8px}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{text-align:left;background:#fff;border:3px solid var(--borda);border-radius:14px;padding:10px 12px;cursor:pointer;font-family:inherit;font-size:1rem;color:var(--tinta)}
+.opt:hover:enabled{border-color:var(--mar);background:#F2FBF5}
+.opt:disabled{cursor:default;opacity:.95}
+.opt .letra{display:inline-block;font-weight:bold;color:var(--mar);width:24px}
+.opt.certa{background:#E6F6F1;border-color:var(--bom)}
+.opt.errada{background:#FFEDE5;border-color:var(--alerta)}
+.fb{margin-top:8px;border-radius:12px;padding:9px 12px;font-size:.96rem}
+.fb.ok{background:#E6F6F1;border-left:6px solid var(--bom)}
+.fb.no{background:#FFEDE5;border-left:6px solid var(--alerta)}
+.btn{background:var(--mar);color:#fff;border:0;border-radius:14px;padding:12px 20px;font-size:1.02rem;font-weight:bold;cursor:pointer;font-family:inherit;box-shadow:0 3px 0 #1C5739}
+.btn:hover{filter:brightness(1.07)}
+.btn.sol{background:var(--amarelo);color:#4A3200;box-shadow:0 3px 0 #B58200}
+.btn.ghost{background:#fff;color:var(--mar);border:3px solid var(--mar);box-shadow:none}
+.center{text-align:center}
+.resultado{display:none;margin-top:16px}
+.resultado.on{display:block}
+.termo-linha{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--borda);padding:8px 0;flex-wrap:wrap}
+.termo-linha .nome{flex:1;min-width:190px;font-weight:bold}
+.tag{font-size:.84rem;font-weight:bold;padding:3px 11px;border-radius:999px;white-space:nowrap}
+.tag.ok{background:#E6F6F1;color:#126B54;border:2px solid var(--bom)}
+.tag.at{background:#FFEDE5;color:#A83C12;border:2px solid var(--alerta)}
+.flipgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:10px}
+.flip{height:175px;perspective:900px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.v .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.95rem;border:3px solid;overflow:auto}
+.flip .f{background:#FFF1E8;border-color:var(--laranja);font-weight:bold}
+.flip .b{background:#fff;border-color:var(--bom);transform:rotateY(180deg)}
+.flip .f small{display:block;color:var(--cinza);font-weight:normal;margin-top:6px}
+.esteira{background:#FFF6E0;border-color:#F3DA9A}
+.esteira .frase{font-size:1.2rem;font-weight:bold;margin:10px 0;text-align:center}
+.esteira .escolhas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.esteira .escolhas button{min-width:120px}
+.placar{font-weight:bold;color:var(--mar);text-align:center;margin-top:10px}
+.barra{background:var(--mar-claro);border-radius:999px;height:16px;overflow:hidden;margin:8px 0}
+.barra div{background:var(--bom);height:100%;width:0;transition:width .4s}
+.nivel{display:inline-block;font-size:.8rem;font-weight:bold;padding:3px 10px;border-radius:999px;margin-left:6px}
+.nivel.f{background:#E6F6F1;color:#126B54}
+.nivel.m{background:#FFF6E0;color:#8A6400}
+.nivel.p{background:#FFEDE5;color:#A83C12}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+th,td{border:2px solid var(--borda);padding:7px 9px;text-align:left}
+th{background:var(--mar-claro)}
+.plano li{margin-bottom:6px}
+.pais{background:#EFF4F7;border-color:#C7D9E2}
+.pais input{font-size:1rem;padding:9px 12px;border:3px solid var(--borda);border-radius:12px;font-family:inherit;width:150px}
+.aviso{font-size:.92rem;color:var(--cinza)}
+.frac{display:inline-block;text-align:center;vertical-align:middle;margin:0 3px;font-weight:bold;line-height:1.15}
+.frac span{display:block;padding:0 5px}
+.frac span:first-child{border-bottom:2px solid currentColor}
+.tabconv td,.tabconv th{text-align:center}
+footer{text-align:center;color:var(--cinza);font-size:.88rem;padding:18px 10px 34px}
+@media(max-width:600px){
+  body{font-size:16px}
+  nav button{padding:8px 10px;font-size:.92rem}
+  header h1{font-size:1.32rem}
+  .card{padding:14px}
+  .flip{height:195px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="mascote">♻️</span>
+  <h1>Usina da Reciclagem</h1>
+  <p><b>Recuperação de Matemática — 5º ano · 3º trimestre</b></p>
+  <p>Colégio Coração Feliz · Unidades 6, 7, 8 e 9</p>
+  <span class="badge">♻️ Um dia para separar, pesar, medir e calcular até a prova</span>
+</header>
+
+<div class="wrap">
+
+<nav>
+  <button data-tab="t1" class="on" onclick="aba('t1',this)">⚖️ Balança<span class="mini">onde estou?</span></button>
+  <button data-tab="t2" onclick="aba('t2',this)">🗺️ Guia da Usina<span class="mini">entender rápido</span></button>
+  <button data-tab="t3" onclick="aba('t3',this)">🚨 Sirene<span class="mini">pegadinhas</span></button>
+  <button data-tab="t4" onclick="aba('t4',this)">🏭 Pátio de Treino<span class="mini">nível prova</span></button>
+  <button data-tab="t5" onclick="aba('t5',this)">🚚 Carregamento Final<span class="mini">simulado</span></button>
+</nav>
+
+<!-- ================= BALANÇA (DIAGNÓSTICO) ================= -->
+<section id="t1" class="on">
+  <div class="card intro">
+    <h2>⚖️ Balança da Usina — 15 perguntas, uma de cada assunto</h2>
+    <p>Oi, jovem aprendiz! Eu sou a <b>Lata</b>, a latinha-chefe desta usina. ♻️</p>
+    <p>Antes de estudar tudo, vamos <b>pesar a carga</b>: uma pergunta de cada assunto do trimestre. No fim eu mostro o que já está <b>no caminhão</b> (você sabe) e o que ainda está <b>na esteira</b> (precisa estudar primeiro). Assim você não perde tempo com o que já domina.</p>
+    <p class="aviso">Responda sem consultar nada — é só uma pesagem, errar aqui ajuda.</p>
+  </div>
+  <div class="card" id="termoBox"></div>
+  <div class="card resultado" id="termoRes"></div>
+
+  <div class="card">
+    <h2>🗓️ Plano de um dia</h2>
+    <ol class="plano">
+      <li><b>Agora:</b> Balança (10 min) — descubra o que ficou na esteira.</li>
+      <li><b>Depois:</b> Guia da Usina (25 min) — leia primeiro os assuntos marcados com ⚠️.</li>
+      <li><b>Em seguida:</b> Sirene (15 min) — vire os cartões e rode o Painel duas vezes.</li>
+      <li><b>Então:</b> Pátio de Treino (25 min) — exercícios subindo até o nível prova.</li>
+      <li><b>Por último:</b> Carregamento Final (30 min) — o simulado de 20 questões.</li>
+    </ol>
+    <p class="aviso">Se o tempo acabar, o que mais vale a pena é: Guia dos assuntos ⚠️ → Painel das Conversões → Carregamento Final.</p>
+  </div>
+</section>
+
+<!-- ================= GUIA (EXPLICAÇÃO FÁCIL) ================= -->
+<section id="t2">
+  <div class="card intro">
+    <h2>🗺️ Guia da Usina — o trimestre em pílulas curtas</h2>
+    <p>Cada pílula tem <b>a regra</b>, <b>exemplos</b> e a caixinha <b>“Como costuma cair na prova”</b>. Se você já fez a Balança, os assuntos para estudar primeiro aparecem com <b>⚠️</b>.</p>
+  </div>
+  <div id="guiaBox"></div>
+
+  <div class="card">
+    <h2>📋 Tabela de conversão (a do colégio, num lugar só)</h2>
+    <table class="tabconv">
+      <tr><th>Comprimento</th><th>Massa</th><th>Capacidade</th><th>Tempo</th></tr>
+      <tr>
+        <td>1 km = 1000 m<br>1 m = 100 cm<br>1 cm = 10 mm</td>
+        <td>1 t = 1000 kg<br>1 kg = 1000 g<br>1 g = 1000 mg</td>
+        <td>1 L = 1000 ml</td>
+        <td>1 h = 60 min<br>1 min = 60 s<br>24 h = 1 dia<br>7 dias = 1 semana<br>12 meses = 1 ano</td>
+      </tr>
+    </table>
+    <p class="aviso" style="margin-top:10px">Indo da unidade <b>grande para a pequena</b> (km → m, kg → g, L → ml, h → min): <b>multiplica</b>. Da <b>pequena para a grande</b> (mm → cm, g → kg, ml → L, s → min): <b>divide</b>.</p>
+  </div>
+
+  <div class="card">
+    <h2>🗂️ De onde veio cada assunto</h2>
+    <table>
+      <tr><th>Assunto</th><th>Unidade do livro</th></tr>
+      <tr><td>Poliedros: prismas e pirâmides</td><td>Unidade 6</td></tr>
+      <tr><td>Expressões numéricas (+ e −) e valor desconhecido</td><td>Unidade 7</td></tr>
+      <tr><td>Adição e subtração com decimais</td><td>Unidade 7</td></tr>
+      <tr><td>Frações com denominadores diferentes</td><td>Unidade 7</td></tr>
+      <tr><td>Multiplicação e divisão; expressões com as 4 operações</td><td>Unidade 8</td></tr>
+      <tr><td>Multiplicação com números decimais</td><td>Unidade 8 (p. 83 a 85)</td></tr>
+      <tr><td>Divisão com quociente decimal</td><td>Unidade 8 (p. 86 a 90)</td></tr>
+      <tr><td>Divisão com dividendo decimal</td><td>Unidade 8 (p. 91 a 93)</td></tr>
+      <tr><td>Comprimento: m, cm e mm</td><td>Unidade 9 (p. 133 a 136)</td></tr>
+      <tr><td>Comprimento: km e m</td><td>Unidade 9 (p. 136 a 138)</td></tr>
+      <tr><td>Massa: kg, g, mg e tonelada</td><td>Unidade 9 (p. 139 a 141) + tabela do colégio</td></tr>
+      <tr><td>Capacidade: litro e mililitro</td><td>tabela de conversão do colégio</td></tr>
+      <tr><td>Medidas de superfície (área)</td><td>Unidade 9 (p. 142 a 144)</td></tr>
+      <tr><td>Medidas de tempo</td><td>Unidade 9 (p. 150 a 152) + tabela do colégio</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= SIRENE (PEGADINHAS) ================= -->
+<section id="t3">
+  <div class="card intro">
+    <h2>🚨 Sirene da Usina — os erros que mais derrubam nota</h2>
+    <p><b>Clique no cartão</b> para virar e ver como não cair na pegadinha.</p>
+  </div>
+  <div class="card">
+    <div class="flipgrid" id="flipBox"></div>
+  </div>
+
+  <div class="card esteira">
+    <h2>📡 Painel das Conversões — treino rápido</h2>
+    <p>Boa parte da prova é <b>trocar de unidade</b> e <b>escolher a ordem certa</b>. Aqui aparece a pergunta e você escolhe entre duas respostas. São 12 rodadas e <b>pode repetir quantas vezes quiser</b> — a ordem muda sempre.</p>
+    <div id="esteiraBox"></div>
+    <div class="placar" id="esteiraPlacar"></div>
+    <div class="center" style="margin-top:12px"><button class="btn sol" onclick="esteiraStart()">🔄 Rodar o Painel</button></div>
+  </div>
+</section>
+
+<!-- ================= PÁTIO DE TREINO ================= -->
+<section id="t4">
+  <div class="card intro">
+    <h2>🏗️ Pátio de Treino — por família de assunto</h2>
+    <p>Os 15 assuntos foram juntados em <b>6 famílias</b>. Em cada uma os exercícios sobem de nível: <span class="nivel f">fácil</span> <span class="nivel m">médio</span> <span class="nivel p">nível prova</span>.</p>
+    <p class="aviso">Pode (e deve) usar papel e lápis para armar as contas — é o que você vai fazer na prova.</p>
+  </div>
+  <div id="treinoBox"></div>
+</section>
+
+<!-- ================= EMBARQUE FINAL (SIMULADO) ================= -->
+<section id="t5">
+  <div class="card intro">
+    <h2>🚚 Carregamento Final — simulado de 20 questões</h2>
+    <p>Marque uma resposta em cada questão e clique em <b>Carregar o caminhão</b> no fim. O <b>gabarito comentado só aparece depois de enviar</b> — é assim que vale como treino de verdade.</p>
+    <p class="aviso">Tudo que está aqui saiu dos dois kits do trimestre (Mensal 1 e Mensal 2).</p>
+  </div>
+  <div class="card" id="simBox"></div>
+  <div class="center" style="margin:16px 0"><button class="btn" id="simBtn" onclick="simEnviar()">🚚 Carregar o caminhão (enviar)</button></div>
+  <div class="card resultado" id="simRes"></div>
+</section>
+
+<!-- ================= PAIS ================= -->
+<div class="card pais">
+  <h2>👨‍👩‍👧 Relatório dos pais</h2>
+  <p>Digite o código dos pais para ver o resultado de cada parte.</p>
+  <p><input id="codPais" type="text" placeholder="código" autocomplete="off">
+  <button class="btn ghost" onclick="verRelatorio()">Ver relatório</button></p>
+  <div id="relBox"></div>
+  <p class="aviso" style="margin-top:14px">O progresso fica salvo neste navegador (em outro aparelho começa do zero). <button class="btn ghost" style="padding:6px 12px;font-size:.9rem" onclick="limparKit()">🧹 Limpar só este kit</button></p>
+</div>
+
+<footer>
+  Usina da Reciclagem · Recuperação de Matemática 5º ano · 3º trimestre<br>
+  Feito a partir dos kits do trimestre: Mensal 1 (Unidades 6, 7 e 8) e Mensal 2 (Unidades 8 e 9)
+</footer>
+</div>
+
+<script>
+/* ===================== ARMAZENAMENTO ===================== */
+var PFX='mat5_rec3tri_';
+var mem={};
+function carregar(){try{var r=localStorage.getItem(PFX+'dados');if(r)mem=JSON.parse(r)||{};}catch(e){mem=window.__mem||{};}}
+function salvar(){try{localStorage.setItem(PFX+'dados',JSON.stringify(mem));}catch(e){window.__mem=mem;}}
+function limparKit(){
+  try{
+    var apagar=[];
+    for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf(PFX)===0)apagar.push(k);}
+    apagar.forEach(function(k){localStorage.removeItem(k);});
+  }catch(e){}
+  mem={};window.__mem={};
+  document.getElementById('relBox').innerHTML='<div class="fb ok">Pronto! Só os dados deste kit foram apagados. Recarregue a página para começar de novo.</div>';
+}
+carregar();
+
+/* fração visual */
+function F(a,b){return '<span class="frac"><span>'+a+'</span><span>'+b+'</span></span>';}
+
+/* ===================== ASSUNTOS ===================== */
+var ASSUNTOS=[
+ {id:'poli',nome:'Poliedros: prismas e pirâmides'},
+ {id:'expr',nome:'Expressões numéricas (+ e −)'},
+ {id:'desc',nome:'Valor desconhecido'},
+ {id:'dec',nome:'Adição e subtração com decimais'},
+ {id:'frac',nome:'Frações com denominadores diferentes'},
+ {id:'muldiv',nome:'Multiplicação e divisão (e estimativa)'},
+ {id:'expr4',nome:'Expressões com as 4 operações'},
+ {id:'mulde',nome:'Multiplicação com decimais'},
+ {id:'divde',nome:'Divisão com resultado decimal'},
+ {id:'comp',nome:'Comprimento: m, cm e mm'},
+ {id:'km',nome:'Comprimento: km e m'},
+ {id:'massa',nome:'Massa: kg, g, mg e tonelada'},
+ {id:'cap',nome:'Capacidade: litro e mililitro'},
+ {id:'area',nome:'Área (medidas de superfície)'},
+ {id:'tempo',nome:'Tempo: h, min e s'}
+];
+
+/* ===================== BALANÇA (DIAGNÓSTICO) ===================== */
+var TERMO=[
+ {as:'poli',q:'Um fardo de papelão prensado tem <b>2 bases iguais</b> em forma de retângulo. Esse sólido é um…',
+  o:['pirâmide retangular','prisma de base retangular','pirâmide quadrangular','poliedro sem base'],a:1,
+  e:'Duas bases iguais → é prisma. Como a base é um retângulo, é um prisma de base retangular.'},
+ {as:'expr',q:'Resolva: 200 − (50 + 30)',o:['120','180','150','280'],a:0,
+  e:'Parênteses primeiro: 50 + 30 = 80. Depois 200 − 80 = 120.'},
+ {as:'desc',q:'Qual é o valor de x em: 80 + x = 140 ?',o:['220','60','70','80'],a:1,
+  e:'Operação contrária dos dois lados: x = 140 − 80 = 60.'},
+ {as:'dec',q:'Resolva: 8,50 + 7,80',o:['15,30','16,20','16,30','1,63'],a:2,
+  e:'Vírgula embaixo da vírgula: 0,50 + 0,80 = 1,30 (vai 1) → 16,30.'},
+ {as:'frac',q:'Resolva: '+F(1,3)+' + '+F(1,5),o:['2/8','2/15','5/8','8/15'],a:3,
+  e:'Denominadores diferentes! Com denominador 15: 5/15 + 3/15 = 8/15.'},
+ {as:'muldiv',q:'Resolva: 980 × 15',o:['14 700','14 070','15 700','9 800'],a:0,
+  e:'980 × 10 = 9 800 e 980 × 5 = 4 900. Somando: 14 700.'},
+ {as:'expr4',q:'Resolva: 40 − 3 × 7',o:['259','28','19','21'],a:2,
+  e:'A multiplicação vem antes: 3 × 7 = 21; depois 40 − 21 = 19.'},
+ {as:'mulde',q:'Uma poltrona custa 8 parcelas de R$ 97,50. Qual é o preço total?',
+  o:['R$ 78,00','R$ 780,00','R$ 7 800,00','R$ 800,00'],a:1,
+  e:'8 × 9750 = 78 000 e, como 97,50 tem 2 casas decimais, o produto também: R$ 780,00.'},
+ {as:'divde',q:'Resolva 25 ÷ 2 com o quociente na forma decimal:',o:['12,1','13','12,5','1,25'],a:2,
+  e:'Sobra 1 unidade, que vira 10 décimos; 10 ÷ 2 = 5 décimos → 12,5.'},
+ {as:'comp',q:'280 cm são quantos metros?',o:['2,8 m','28 m','0,28 m','28 000 m'],a:0,
+  e:'De cm para m divide por 100: 280 ÷ 100 = 2,8 m.'},
+ {as:'km',q:'1,8 km são quantos metros?',o:['180 m','18 m','1800 m','0,0018 m'],a:2,
+  e:'De km para m multiplica por 1000: 1,8 × 1000 = 1800 m.'},
+ {as:'massa',q:'8,5 kg são quantos gramas?',o:['85 g','850 g','8500 g','0,0085 g'],a:2,
+  e:'De kg para g multiplica por 1000: 8,5 × 1000 = 8500 g.'},
+ {as:'cap',q:'500 ml são quantos litros?',o:['5 L','0,5 L','50 L','0,05 L'],a:1,
+  e:'De ml para L divide por 1000: 500 ÷ 1000 = 0,5 L (meio litro).'},
+ {as:'area',q:'Um pátio retangular mede 8 m de comprimento por 4,5 m de largura. Qual é a área?',
+  o:['12,5 m²','25 m²','3,6 m²','36 m²'],a:3,
+  e:'Área do retângulo = comprimento × largura: 8 × 4,5 = 36 m².'},
+ {as:'tempo',q:'150 segundos são quantos minutos?',o:['2,5 min','1,5 min','25 min','9000 min'],a:0,
+  e:'De s para min divide por 60: 150 ÷ 60 = 2,5 min (2 min e 30 s).'}
+];
+
+/* ===================== GUIA (PÍLULAS) ===================== */
+var GUIA=[
+ {g:'📦 Geometria (Unidade 6)'},
+ {as:'poli',em:'📦',t:'Prisma e pirâmide',
+  r:'<b>Poliedros</b> são sólidos de faces planas. A <b>pirâmide</b> tem só <b>1 base</b> (qualquer polígono) e as faces laterais são <b>triângulos</b> que se encontram lá em cima, num ponto chamado <b>vértice</b> (a pontinha). O <b>prisma</b> tem <b>2 bases iguais</b> (congruentes), uma em cima e outra embaixo, e as faces laterais têm forma de <b>quadrilátero</b> — é como um tubo com duas tampas iguais. O <b>nome</b> do sólido vem do <b>polígono da base</b>: base quadrada → quadrangular; base pentagonal → pentagonal.',
+  ex:'Um fardo prensado ou uma caixa de sapato = <b>prisma</b> de base retangular · uma barraquinha em ponta ou um chapéu de festa = <b>pirâmide</b>.',
+  p:'A prova diz <b>quantas bases</b> o sólido tem e <b>que forma</b> elas têm, e pede o nome completo. Conte as bases: 2 iguais → prisma; 1 → pirâmide. Depois olhe o polígono da base.'},
+
+ {g:'🔢 Operações e álgebra (Unidades 7 e 8)'},
+ {as:'expr',em:'🧮',t:'Expressões numéricas (+ e −)',
+  r:'Expressão numérica é uma conta com várias operações juntas. A ordem é sempre: <b>1º parênteses</b> · <b>2º multiplicação e divisão</b> (da esquerda para a direita) · <b>3º adição e subtração</b> (da esquerda para a direita).',
+  ex:'(27 358 + 16 161) − (29 357 + 11 507) → 43 519 − 40 864 = <b>2 655</b> · 88 + 95 − 12 → 183 − 12 = <b>171</b> · 220 − (300 − 150) → 220 − 150 = <b>70</b>.',
+  p:'Costumam aparecer <b>dois parênteses</b> para resolver antes. Resolva cada um, anote o resultado e só depois junte os dois.'},
+ {as:'desc',em:'❓',t:'Valor desconhecido (o x)',
+  r:'O valor desconhecido é o número que a gente ainda não sabe. Para achar, fazemos a <b>operação contrária</b> dos dois lados da igualdade. A igualdade é como uma <b>balança</b>: o que se faz de um lado tem de ser feito do outro, para continuar igual.',
+  ex:'80 + x = 140 → x = 140 − 80 = <b>60</b> · 23 = 30 − ? → 30 − 7 = 23, então o número é <b>7</b> · 30 + x = 100 → x = <b>70</b>.',
+  p:'Se o desconhecido está <b>somado</b>, você <b>subtrai</b>; se está <b>subtraído</b>, você soma. Confira sempre pondo o número achado de volta na conta.'},
+ {as:'dec',em:'💰',t:'Somar e subtrair com decimais',
+  r:'Números decimais têm vírgula (como o dinheiro: R$ 8,50). Para somar ou subtrair, arme a conta com a <b>vírgula embaixo da vírgula</b> e calcule da direita para a esquerda, igual aos naturais. Dá para fazer de cabeça <b>por partes</b>: primeiro os inteiros, depois os decimais. <b>Estimar</b> é arredondar para o real mais próximo e ter uma ideia rápida.',
+  ex:'8,50 + 7,80 = <b>16,30</b> · 31,34 − 28,90 = <b>2,44</b> · 11,50 + 5,25 → 11 + 5 = 16 e 0,50 + 0,25 = 0,75 → <b>16,75</b>.',
+  p:'Quase sempre vem como <b>troco</b> ou <b>desconto</b>: pagar R$ 12,40 com R$ 20,00 → 20,00 − 12,40 = <b>R$ 7,60</b>.'},
+ {as:'frac',em:'🍰',t:'Frações: somar e subtrair',
+  r:'Na fração, o número de baixo é o <b>denominador</b> (em quantas partes o todo foi dividido) e o de cima é o <b>numerador</b> (quantas partes pegamos). Com o <b>mesmo denominador</b>, mantém-se o de baixo e soma-se (ou subtrai-se) só os de cima. Com denominadores <b>diferentes</b>, primeiro achamos <b>frações equivalentes</b> com o <b>mesmo denominador</b> (multiplicando em cima e embaixo pelo mesmo número) e só então somamos.',
+  ex:F(3,8)+' + '+F(2,8)+' = '+F(5,8)+' · '+F(1,3)+' + '+F(1,5)+' → '+F(5,15)+' + '+F(3,15)+' = '+F(8,15)+' · '+F(1,2)+' − '+F(2,5)+' → '+F(5,10)+' − '+F(4,10)+' = '+F(1,10)+' · '+F(1,2)+' = '+F(2,4)+' (equivalentes).',
+  p:'A pegadinha é somar os números <b>de baixo</b>. Nunca! Quando os denominadores são diferentes, iguale-os primeiro.'},
+ {as:'muldiv',em:'✖️',t:'Multiplicação e divisão (números naturais)',
+  r:'Multiplicar é <b>juntar várias vezes</b> a mesma quantidade; dividir é <b>repartir um total em partes iguais</b>. Uma boa estratégia é <b>estimar</b> (arredondar) e depois fazer a conta exata pelo algoritmo, com o fator maior em cima. Na <b>divisão exata</b> o resto é zero.',
+  ex:'980 × 15: estimando 1000 × 15 = 15 000; exato = <b>14 700</b> · 37 × 23 → 740 + 111 = <b>851</b> · 39 000 ÷ 6 = <b>6 500</b> · 156 ÷ 12 = <b>13</b>.',
+  p:'Leia se o problema pede <b>estimativa</b> (valor aproximado) ou o <b>valor exato</b> — e, na divisão, veja quem é o <b>total</b> e em quantas partes ele será dividido.'},
+ {as:'expr4',em:'🔢',t:'Expressões com as quatro operações',
+  r:'Com as 4 operações juntas, a ordem continua a mesma: <b>parênteses</b> → <b>× e ÷</b> (esquerda para a direita) → <b>+ e −</b> (esquerda para a direita). Decore: <b>PA-ME-DI-A-S</b> (PArênteses, Multiplicação, DIvisão, Adição, Subtração).',
+  ex:'(9 × 4 + 4 × 11 + 1 × 18) ÷ 2 → 36 + 44 + 18 = 98 → 98 ÷ 2 = <b>49</b> · 40 − 3 × 7 → 21 → 40 − 21 = <b>19</b> · 120 − (2 × 15 + 20) → 50 → <b>70</b> · 5 × 6 + 20 ÷ 4 → 30 + 5 = <b>35</b>.',
+  p:'Dentro do parêntese também vale a ordem: primeiro as multiplicações, depois as somas. Quem faz “40 − 3” antes de “3 × 7” erra a questão inteira.'},
+ {as:'mulde',em:'🏷️',t:'Multiplicação com decimais',
+  r:'Faça a conta <b>como se não houvesse vírgula</b> e, no fim, coloque a vírgula no resultado (o <b>produto</b>). A regra: o produto tem o <b>mesmo número de casas decimais</b> que os fatores. Antes, <b>estime</b> para saber onde a vírgula deve cair.',
+  ex:'8 × 97,50 → 8 × 9750 = 78 000 → 97,50 tem 2 casas → <b>780,00</b> (estimativa: 8 × 100 = 800) · 6 × 15,7 → 942 → 1 casa → <b>94,2</b> · 9 × 6,34 → 5706 → 2 casas → <b>57,06</b>.',
+  p:'As alternativas erradas são quase sempre o <b>mesmo número com a vírgula no lugar errado</b> (78,00 · 7 800,00). Estime primeiro e escolha a que faz sentido.'},
+ {as:'divde',em:'➗',t:'Divisão com resultado decimal',
+  r:'Quando sobra resto, a conta <b>pode continuar</b>: trocamos <b>1 unidade por 10 décimos</b> e colocamos a <b>vírgula no quociente</b> ao começar a dividir os décimos. Se sobrar décimo, troca por centésimos; se sobrar centésimo, por milésimos. Quando o <b>dividendo</b> já tem vírgula, divide-se <b>ordem por ordem, da esquerda para a direita</b>, igual aos naturais.',
+  ex:'25 ÷ 2 → sobra 1 = 10 décimos → 10 ÷ 2 = 5 → <b>12,5</b> · 26 ÷ 4 → sobra 2 = 20 décimos → <b>6,5</b> · 64,23 ÷ 3 = <b>21,41</b> · 48,6 ÷ 3 = <b>16,2</b>.',
+  p:'A pegadinha clássica é responder “12, resto 1” como <b>12,1</b>. O resto 1 vira <b>10 décimos</b>: 10 ÷ 2 = 5 → 12,5.'},
+
+ {g:'📏 Medidas (Unidade 9)'},
+ {as:'comp',em:'📏',t:'Comprimento: metro, centímetro e milímetro',
+  r:'<b>1 m = 100 cm</b> → de m para cm <b>multiplica por 100</b>; de cm para m <b>divide por 100</b>.<br><b>1 cm = 10 mm</b> → de cm para mm <b>multiplica por 10</b>; de mm para cm <b>divide por 10</b>.<br>O milímetro é a <b>décima</b> parte do centímetro; o centímetro é a <b>centésima</b> parte do metro; o milímetro é a <b>milésima</b> parte do metro.',
+  ex:'4 m = 400 cm · 280 cm = 2,8 m · 28 cm = 0,28 m · 0,98 m = 98 cm · 62 mm = 6,2 cm · 12 cm = 120 mm · 10 cm e 7 mm = <b>10,7 cm</b>.',
+  p:'Pergunta típica: alturas em cm para passar a metros (140 cm = 1,40 m · 75 cm = 0,75 m · 210 cm = 2,10 m). E cuidado com “10 cm e 7 mm”: não é 17 cm, é 10,7 cm.'},
+ {as:'km',em:'🛣️',t:'Comprimento: quilômetro e metro',
+  r:'Para distâncias grandes usamos o <b>quilômetro</b>. <b>1 km = 1000 m</b> → de km para m <b>multiplica por 1000</b>; de m para km <b>divide por 1000</b>.',
+  ex:'1,8 km = 1800 m · 0,75 km = 750 m · 20 km = 20 000 m · 580 m = 0,58 km · 12 300 m = 12,3 km · 8 m = <b>0,008 km</b>. O Monte Everest tem cerca de 8,85 km, isto é, 8850 m.',
+  p:'O número fica <b>maior</b> quando se vai de km para m, e <b>menor</b> de m para km. Se o resultado não fizer sentido, você trocou a conta.'},
+ {as:'massa',em:'⚖️',t:'Massa: quilograma, grama, miligrama e tonelada',
+  r:'<b>1 kg = 1000 g</b> → kg para g <b>× 1000</b>; g para kg <b>÷ 1000</b>.<br><b>1 g = 1000 mg</b> → g para mg <b>× 1000</b>; mg para g <b>÷ 1000</b>.<br>Pela tabela do colégio: <b>1000 kg = 1 t</b> (uma tonelada).',
+  ex:'10 kg = 10 000 g · 6000 g = 6 kg · 8,5 kg = 8500 g · 1200 g = 1,2 kg · 0,5 kg = 500 g · 3,5 g = 3500 mg · 17 350 mg = <b>17,35 g</b>.',
+  p:'Vem como embalagem: um pacote de 4 kg traz escrito <b>4000 gramas</b>; uma receita de 1,75 kg usa <b>1750 g</b>.'},
+ {as:'cap',em:'🧃',t:'Capacidade: litro e mililitro',
+  r:'<b>Capacidade</b> é quanto cabe dentro de um recipiente. Pela tabela de conversão do colégio: <b>1000 ml = 1 L</b> → de L para ml <b>multiplica por 1000</b>; de ml para L <b>divide por 1000</b>.',
+  ex:'2 L = 2000 ml · 500 ml = 0,5 L · 1,5 L = <b>1500 ml</b>.',
+  p:'É a mesma ideia do kg e do g: a unidade grande é o litro, a pequena é o mililitro. Se trocar o 1000 por 100, a resposta sai 10 vezes errada.'},
+ {as:'area',em:'🧺',t:'Área (medidas de superfície)',
+  r:'As unidades de superfície são <b>km²</b>, <b>m²</b> e <b>cm²</b>. Medir uma superfície em centímetros quadrados é <b>contar quantos quadradinhos de 1 cm²</b> cabem nela. No <b>retângulo</b>, a área é <b>comprimento × largura</b>, com as duas medidas na <b>mesma unidade</b>.',
+  ex:'Figura com 12 quadradinhos de 1 cm² → <b>12 cm²</b> · pátio de 8 m por 4,5 m → 8 × 4,5 = <b>36 m²</b> · retângulo de 4 cm por 2,5 cm → <b>10 cm²</b> · retângulo de 3 cm por 1,5 cm → <b>4,5 cm²</b>.',
+  p:'Duas pegadinhas na mesma questão: <b>somar</b> em vez de multiplicar (a soma dos lados dá a volta toda, não a área) e esquecer o <b>²</b> na unidade.'},
+ {as:'tempo',em:'⏰',t:'Medidas de tempo',
+  r:'<b>1 h = 60 min</b> → h para min <b>× 60</b>; min para h <b>÷ 60</b>.<br><b>1 min = 60 s</b> → min para s <b>× 60</b>; s para min <b>÷ 60</b>.<br><b>meia hora = 30 min</b> · <b>um quarto de hora = 15 min</b>.<br>Da tabela do colégio: 24 h = 1 dia · 7 dias = 1 semana · 12 meses = 1 ano.',
+  ex:'2 h = 120 min · 1 h e ¼ = 60 + 15 = 75 min · 2 h e ½ = 120 + 30 = 150 min · 3 min = 180 s · 240 s = 4 min · 150 s = 2,5 min · 5 h = 300 min = <b>18 000 s</b>.',
+  p:'O tempo é de <b>60 em 60</b>, nunca de 100 em 100. E atenção ao exemplo do livro: a décima parte de um dia é 24 ÷ 10 = 2,4 h, que é <b>2 h e 24 min</b> (0,4 × 60), e não 2 h e 40 min.'}
+];
+
+/* ===================== SIRENE (PEGADINHAS) ===================== */
+var PEGADINHAS=[
+ {f:'Prisma × pirâmide',b:'<b>Pirâmide:</b> 1 base e faces laterais <b>triangulares</b>. <b>Prisma:</b> 2 bases iguais e faces laterais em <b>quadrilátero</b>.'},
+ {f:'“Prisma quadrangular” vem de quê?',b:'Do <b>polígono da base</b>, não do número total de faces. Base quadrada → quadrangular.'},
+ {f:'Começar a expressão pela soma',b:'Primeiro os <b>parênteses</b>, depois <b>× e ÷</b>, só no fim <b>+ e −</b>.'},
+ {f:'40 − 3 × 7 = 259?',b:'Não! A multiplicação vem antes: 3 × 7 = 21 → 40 − 21 = <b>19</b>.'},
+ {f:'Qual conta faço primeiro entre × e ÷?',b:'A que aparece primeiro: resolve-se <b>da esquerda para a direita</b>. O mesmo vale entre + e −.'},
+ {f:'Valor desconhecido: que conta uso?',b:'A <b>inversa</b>. Em 80 + x = 140, tira-se 80: x = <b>60</b>.'},
+ {f:'Somar decimais alinhando pela direita',b:'Nos decimais é <b>vírgula embaixo de vírgula</b>: reais com reais, centavos com centavos.'},
+ {f:'1/3 + 1/5 = 2/8?',b:'Nunca some os números <b>de baixo</b>! Com denominador 15: 5/15 + 3/15 = <b>8/15</b>.'},
+ {f:'Mesmo denominador: o que faço?',b:'Soma só os <b>de cima</b> e <b>mantém</b> o de baixo: 3/8 + 2/8 = <b>5/8</b>.'},
+ {f:'Onde entra a vírgula no produto?',b:'O produto tem <b>as mesmas casas decimais dos fatores</b>. 8 × 97,50 (2 casas) = <b>780,00</b>.'},
+ {f:'25 ÷ 2 = 12,1?',b:'O resto 1 <b>não</b> vira “,1”: ele vira <b>10 décimos</b>, e 10 ÷ 2 = 5 → <b>12,5</b>.'},
+ {f:'De metro para centímetro, × 1000?',b:'Não: <b>× 100</b> (1 m = 100 cm). O 1000 é do km → m, do kg → g e do L → ml.'},
+ {f:'1 g = 100 mg?',b:'Não: <b>1 g = 1000 mg</b>. Então 3,5 g = <b>3500 mg</b>.'},
+ {f:'Área é somar os lados?',b:'Não: no retângulo é <b>comprimento × largura</b>. Somar os 4 lados dá a volta toda, não a área.'},
+ {f:'Esqueci o ² na área',b:'Área se mede em unidade <b>quadrada</b>: cm², m², km². Escrever “12 cm” em vez de “12 cm²” perde a questão.'},
+ {f:'Meia hora = 50 min?',b:'Não: <b>1 h = 60 min</b>, então meia hora = <b>30 min</b> e um quarto de hora = <b>15 min</b>.'},
+ {f:'A décima parte de um dia é 2 h e 40 min?',b:'Não! 24 ÷ 10 = 2,4 h e 0,4 × 60 = 24 min → <b>2 h e 24 min</b>.'},
+ {f:'Estimar é a mesma coisa que o valor exato?',b:'Não. <b>Estimar</b> é arredondar para ter uma ideia rápida; a prova às vezes pede um, às vezes o outro. Leia com calma.'}
+];
+
+/* ===================== ESTEIRA DAS CONVERSÕES ===================== */
+var ESTEIRA=[
+ {f:'De <b>metros</b> para <b>centímetros</b> eu…',o:['× 100','÷ 100'],a:0,e:'1 m = 100 cm. Ex.: 4 m = 400 cm.'},
+ {f:'De <b>centímetros</b> para <b>metros</b> eu…',o:['× 100','÷ 100'],a:1,e:'280 cm ÷ 100 = 2,8 m.'},
+ {f:'De <b>centímetros</b> para <b>milímetros</b> eu…',o:['× 10','× 100'],a:0,e:'1 cm = 10 mm. Ex.: 12 cm = 120 mm.'},
+ {f:'De <b>milímetros</b> para <b>centímetros</b> eu…',o:['÷ 10','÷ 100'],a:0,e:'62 mm ÷ 10 = 6,2 cm.'},
+ {f:'De <b>quilômetros</b> para <b>metros</b> eu…',o:['× 1000','× 100'],a:0,e:'1 km = 1000 m. Ex.: 1,8 km = 1800 m.'},
+ {f:'De <b>metros</b> para <b>quilômetros</b> eu…',o:['÷ 1000','÷ 100'],a:0,e:'580 m ÷ 1000 = 0,58 km.'},
+ {f:'De <b>quilogramas</b> para <b>gramas</b> eu…',o:['× 1000','× 100'],a:0,e:'1 kg = 1000 g. Ex.: 8,5 kg = 8500 g.'},
+ {f:'De <b>miligramas</b> para <b>gramas</b> eu…',o:['÷ 1000','÷ 100'],a:0,e:'1 g = 1000 mg → 17 350 mg = 17,35 g.'},
+ {f:'1000 kg formam…',o:['1 tonelada','1 quilômetro'],a:0,e:'Pela tabela do colégio: 1000 kg = 1 t.'},
+ {f:'De <b>litros</b> para <b>mililitros</b> eu…',o:['× 1000','× 100'],a:0,e:'1 L = 1000 ml. Ex.: 1,5 L = 1500 ml.'},
+ {f:'De <b>horas</b> para <b>minutos</b> eu…',o:['× 60','× 100'],a:0,e:'1 h = 60 min. Ex.: 5 h = 300 min.'},
+ {f:'De <b>segundos</b> para <b>minutos</b> eu…',o:['÷ 60','÷ 100'],a:0,e:'240 s ÷ 60 = 4 min.'},
+ {f:'Em 20 − 2 × 5, eu começo por…',o:['20 − 2','2 × 5'],a:1,e:'× antes de −: 2 × 5 = 10 → 20 − 10 = 10.'},
+ {f:'Para somar '+F(1,2)+' + '+F(1,4)+', primeiro eu…',o:['somo os de baixo','deixo os de baixo iguais'],a:1,e:'1/2 = 2/4; então 2/4 + 1/4 = 3/4.'},
+ {f:'Para achar a <b>área</b> de um retângulo eu…',o:['multiplico comprimento × largura','somo comprimento + largura'],a:0,e:'8 m × 4,5 m = 36 m².'},
+ {f:'No produto de 6 × 15,7, a vírgula fica com…',o:['1 casa decimal','2 casas decimais'],a:0,e:'15,7 tem 1 casa, então o produto também: 94,2.'}
+];
+
+/* ===================== PÁTIO DE TREINO ===================== */
+var TREINO=[
+ {fam:'Fardos e caixas (sólidos geométricos)',em:'📦',qs:[
+  {n:'f',q:'Quantas bases tem uma pirâmide?',o:['Apenas 1','2 bases iguais','3 bases','Nenhuma base'],a:0,
+   e:'A pirâmide tem só 1 base; as faces laterais são triângulos que se encontram no vértice.'},
+  {n:'f',q:'As faces laterais de um <b>prisma</b> têm a forma de:',o:['triângulos','quadriláteros (retângulos)','círculos','pentágonos'],a:1,
+   e:'No prisma as faces laterais são quadriláteros. Triângulos são das pirâmides.'},
+  {n:'m',q:'Uma caixa tem 2 bases iguais em forma de triângulo. Ela é um:',o:['prisma triangular','pirâmide triangular','prisma quadrangular','pirâmide quadrangular'],a:0,
+   e:'Tem 2 bases iguais → prisma. A base é triângulo → prisma triangular.'},
+  {n:'p',q:'Uma embalagem tem <b>1 base</b> em forma de quadrado e as faces laterais em forma de triângulo. Ela é uma:',o:['prisma quadrangular','pirâmide quadrangular','prisma triangular','pirâmide triangular'],a:1,
+   e:'1 base + faces triangulares → pirâmide. A base é quadrada → pirâmide quadrangular.'},
+  {n:'p',q:'Um pacote tem 2 bases iguais em forma de pentágono. Qual é o nome completo do sólido?',o:['pirâmide pentagonal','prisma hexagonal','prisma pentagonal','pirâmide hexagonal'],a:2,
+   e:'2 bases iguais → prisma; base pentagonal → prisma pentagonal.'}
+ ]},
+ {fam:'Expressões numéricas e valor desconhecido',em:'🧮',qs:[
+  {n:'f',q:'Resolva: (44 − 6) + (18 + 12)',o:['68','60','80','58'],a:0,
+   e:'Parênteses primeiro: 44 − 6 = 38 e 18 + 12 = 30. Depois 38 + 30 = 68.'},
+  {n:'f',q:'Complete: 23 = 30 − ?',o:['7','53','13','17'],a:0,
+   e:'Que número tira de 30 para dar 23? 30 − 7 = 23.'},
+  {n:'m',q:'Resolva: 220 − (300 − 150)',o:['370','70','130','220'],a:1,
+   e:'Parêntese primeiro: 300 − 150 = 150. Depois 220 − 150 = 70.'},
+  {n:'m',q:'Resolva: 5 × 6 + 20 ÷ 4',o:['35','50','12,5','45'],a:0,
+   e:'Primeiro × e ÷: 5 × 6 = 30 e 20 ÷ 4 = 5. Depois 30 + 5 = 35.'},
+  {n:'p',q:'Resolva: 120 − (2 × 15 + 20)',o:['50','90','70','30'],a:2,
+   e:'No parêntese: 2 × 15 = 30, mais 20 = 50. Depois 120 − 50 = 70.'}
+ ]},
+ {fam:'Somar e subtrair: decimais e frações',em:'💰',qs:[
+  {n:'f',q:'Resolva: 12,40 + 6,75',o:['19,15','18,15','19,05','1,915'],a:0,
+   e:'Vírgula embaixo de vírgula: 12,40 + 6,75 = 19,15.'},
+  {n:'f',q:'Resolva: '+F(3,8)+' + '+F(2,8),o:['5/16','5/8','6/8','1/8'],a:1,
+   e:'Mesmo denominador: mantém o 8 e soma os de cima: 3 + 2 = 5 → 5/8.'},
+  {n:'m',q:'Uma compra de R$ 12,40 foi paga com R$ 20,00. Qual é o troco?',o:['R$ 7,60','R$ 8,60','R$ 7,40','R$ 32,40'],a:0,
+   e:'20,00 − 12,40 = 7,60.'},
+  {n:'m',q:'Resolva: '+F(1,2)+' + '+F(1,4),o:['2/6','3/4','1/6','3/8'],a:1,
+   e:'Com denominador 4: 1/2 vira 2/4. Então 2/4 + 1/4 = 3/4.'},
+  {n:'p',q:'Resolva: '+F(1,2)+' − '+F(2,5),o:['1/3','3/10','1/10','1/7'],a:2,
+   e:'Com denominador 10: 5/10 − 4/10 = 1/10.'},
+  {n:'p',q:'Resolva: 31,34 − 28,90',o:['3,44','2,54','2,44','60,24'],a:2,
+   e:'31,34 − 28,90 = 2,44 (cuidado com o empréstimo).'}
+ ]},
+ {fam:'Multiplicar e dividir (inteiros e decimais)',em:'✖️',qs:[
+  {n:'f',q:'Resolva: 12 × 40',o:['480','408','120','4800'],a:0,
+   e:'12 × 4 = 48 e depois × 10 → 480.'},
+  {n:'f',q:'Resolva: 2 × 4,7',o:['8,14','9,4','94','0,94'],a:1,
+   e:'2 × 47 = 94 e 4,7 tem 1 casa decimal → 9,4.'},
+  {n:'m',q:'Resolva: 37 × 23',o:['840','861','851','951'],a:2,
+   e:'37 × 20 = 740 e 37 × 3 = 111. Somando: 851.'},
+  {n:'m',q:'Resolva: 322 ÷ 5 (quociente na forma decimal)',o:['64,2','644','64,4','6,44'],a:2,
+   e:'322 ÷ 5 = 64, sobra 2 → 20 décimos ÷ 5 = 4 décimos → 64,4.'},
+  {n:'p',q:'Resolva: 5 × 49,62',o:['248,10','24,810','2481,0','245,10'],a:0,
+   e:'5 × 4962 = 24 810 → 2 casas decimais → 248,10 (estimativa: 5 × 50 = 250).'}
+ ]},
+ {fam:'Comprimento, massa e capacidade',em:'📏',qs:[
+  {n:'f',q:'4 m são quantos centímetros?',o:['40 cm','400 cm','4000 cm','0,04 cm'],a:1,
+   e:'De m para cm multiplica por 100: 4 × 100 = 400 cm.'},
+  {n:'f',q:'62 mm são quantos centímetros?',o:['6,2 cm','620 cm','0,62 cm','62 cm'],a:0,
+   e:'De mm para cm divide por 10: 62 ÷ 10 = 6,2 cm.'},
+  {n:'m',q:'1200 g de farinha são quantos quilogramas?',o:['12 kg','1,2 kg','120 kg','1,02 kg'],a:1,
+   e:'De g para kg divide por 1000: 1200 ÷ 1000 = 1,2 kg.'},
+  {n:'m',q:'12 300 m são quantos quilômetros?',o:['123 km','1,23 km','12,3 km','12 300 000 km'],a:2,
+   e:'De m para km divide por 1000: 12 300 ÷ 1000 = 12,3 km.'},
+  {n:'p',q:'17 350 mg são quantos gramas?',o:['173,5 g','1,735 g','17,35 g','17 350 000 g'],a:2,
+   e:'De mg para g divide por 1000: 17 350 ÷ 1000 = 17,35 g.'},
+  {n:'p',q:'Um cabo mede 10 cm e 7 mm. Qual é a medida dele em centímetros?',o:['17 cm','10,7 cm','107 cm','10,07 cm'],a:1,
+   e:'7 mm = 0,7 cm (÷ 10). Então 10 + 0,7 = 10,7 cm.'}
+ ]},
+ {fam:'Área e tempo',em:'🧺',qs:[
+  {n:'f',q:'Uma figura é formada por 12 quadradinhos de 1 cm². Qual é a área dela?',o:['12 cm','12 cm²','24 cm²','6 cm²'],a:1,
+   e:'Área = quantos quadradinhos de 1 cm² cabem: 12 cm² (com o ²).'},
+  {n:'f',q:'2 horas são quantos minutos?',o:['120 min','200 min','20 min','60 min'],a:0,
+   e:'De h para min multiplica por 60: 2 × 60 = 120 min.'},
+  {n:'m',q:'Um tapete retangular mede 3 cm por 1,5 cm na planta. Qual é a área?',o:['4,5 cm','9 cm²','4,5 cm²','45 cm²'],a:2,
+   e:'Área = comprimento × largura: 3 × 1,5 = 4,5 cm².'},
+  {n:'m',q:'2 horas e ½ hora correspondem a quantos minutos?',o:['130 min','250 min','90 min','150 min'],a:3,
+   e:'2 h = 120 min e ½ h = 30 min: 120 + 30 = 150 min.'},
+  {n:'p',q:'Quanto tempo é a décima parte de um dia?',o:['2 h e 40 min','2 h e 24 min','2,4 min','10 h'],a:1,
+   e:'24 h ÷ 10 = 2,4 h, e 0,4 h × 60 = 24 min → 2 h e 24 min.'}
+ ]}
+];
+
+/* ===================== EMBARQUE FINAL (SIMULADO 20) ===================== */
+var SIMULADO=[
+ {q:'As faces laterais de uma <b>pirâmide</b> têm a forma de:',o:['quadriláteros','triângulos','círculos','hexágonos'],a:1,
+  e:'Na pirâmide as faces laterais são triângulos, que se encontram no vértice.'},
+ {q:'Uma embalagem é uma pirâmide com a base em forma de quadrado. O nome dela é:',o:['prisma quadrangular','pirâmide triangular','pirâmide quadrangular','prisma triangular'],a:2,
+  e:'O nome vem do polígono da base: base quadrada → quadrangular.'},
+ {q:'Resolva: 220 − (300 − 150)',o:['70','370','130','220'],a:0,
+  e:'Parêntese primeiro: 300 − 150 = 150. Depois 220 − 150 = 70.'},
+ {q:'Qual é o valor de x em: 30 + x = 100 ?',o:['130','60','80','70'],a:3,
+  e:'Operação contrária: x = 100 − 30 = 70.'},
+ {q:'Resolva: 11,50 + 5,25',o:['16,55','17,75','16,75','6,75'],a:2,
+  e:'Inteiros 11 + 5 = 16; decimais 0,50 + 0,25 = 0,75 → 16,75.'},
+ {q:'Um caderno de R$ 31,34 teve um desconto de R$ 28,90. Quanto ficou?',o:['R$ 2,44','R$ 3,44','R$ 2,54','R$ 60,24'],a:0,
+  e:'31,34 − 28,90 = 2,44.'},
+ {q:'Resolva: '+F(1,3)+' + '+F(1,5),o:['2/8','2/15','8/15','5/8'],a:2,
+  e:'Denominador comum 15: 5/15 + 3/15 = 8/15.'},
+ {q:'Resolva: 39 000 ÷ 6',o:['650','6 500','6 000','6 560'],a:1,
+  e:'39 000 ÷ 6 = 6 500 (cuidado com a quantidade de zeros).'},
+ {q:'Uma carreta leva 980 kg por viagem e fará 15 viagens. Quantos quilogramas no total?',o:['14 070 kg','15 700 kg','14 700 kg','9 800 kg'],a:2,
+  e:'980 × 10 = 9 800 e 980 × 5 = 4 900 → 14 700 kg. (Estimando: 1000 × 15 = 15 000.)'},
+ {q:'Resolva: (9 × 4 + 4 × 11 + 1 × 18) ÷ 2',o:['98','49','58','44'],a:1,
+  e:'Dentro do parêntese: 36 + 44 + 18 = 98. Depois 98 ÷ 2 = 49.'},
+ {q:'Resolva: 5 × 12,3',o:['61,5','60,15','615','6,15'],a:0,
+  e:'5 × 123 = 615 → 1 casa decimal → 61,5.'},
+ {q:'Um caminhão recebeu 9 litros de combustível a R$ 6,34 o litro. Quanto foi pago?',o:['R$ 5,706','R$ 570,60','R$ 54,06','R$ 57,06'],a:3,
+  e:'9 × 634 = 5706 → 2 casas decimais → R$ 57,06 (estimando: 9 × 6 = 54).'},
+ {q:'Quatro caixas iguais pesam juntas 26 kg. Qual é a massa de cada caixa?',o:['6,2 kg','6,5 kg','6 kg','104 kg'],a:1,
+  e:'26 ÷ 4 = 6, sobra 2 → 20 décimos ÷ 4 = 5 → 6,5 kg.'},
+ {q:'Resolva: 72,88 ÷ 4',o:['1,822','18,02','182,2','18,22'],a:3,
+  e:'7 ÷ 4 = 1 (sobra 3); 32 ÷ 4 = 8; 8 décimos ÷ 4 = 2; 8 centésimos ÷ 4 = 2 → 18,22.'},
+ {q:'Um cabo mede 15,44 cm. Quantos milímetros são?',o:['154,4 mm','1,544 mm','1544 mm','15,44 mm'],a:0,
+  e:'De cm para mm multiplica por 10: 15,44 × 10 = 154,4 mm.'},
+ {q:'8 m correspondem a quantos quilômetros?',o:['0,08 km','0,8 km','0,008 km','8000 km'],a:2,
+  e:'De m para km divide por 1000: 8 ÷ 1000 = 0,008 km.'},
+ {q:'Uma receita usa 1,75 kg de leite em pó. Quantos gramas são?',o:['175 g','1750 g','17 500 g','1075 g'],a:1,
+  e:'De kg para g multiplica por 1000: 1,75 × 1000 = 1750 g.'},
+ {q:'Uma garrafa tem 2 L de suco. Quantos mililitros são?',o:['200 ml','20 ml','2000 ml','0,002 ml'],a:2,
+  e:'De L para ml multiplica por 1000: 2 × 1000 = 2000 ml.'},
+ {q:'Um pátio retangular mede 8 m por 4,5 m. Qual é a área?',o:['12,5 m²','25 m²','36 m²','3,6 m²'],a:2,
+  e:'Área = comprimento × largura: 8 × 4,5 = 36 m². (12,5 é a soma dos dois lados e 25 é a volta toda.)'},
+ {q:'Um turno da usina dura 5 horas. Quantos minutos são?',o:['500 min','50 min','3000 min','300 min'],a:3,
+  e:'De h para min multiplica por 60: 5 × 60 = 300 min.'}
+];
+
+/* ===================== NAVEGAÇÃO ===================== */
+function aba(id,btn){
+  var s=document.querySelectorAll('section');
+  for(var i=0;i<s.length;i++)s[i].classList.remove('on');
+  document.getElementById(id).classList.add('on');
+  var b=document.querySelectorAll('nav button');
+  for(var j=0;j<b.length;j++)b[j].classList.remove('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===================== RENDER GENÉRICO DE QUESTÃO ===================== */
+var LET=['A','B','C','D'];
+var BANCOS={};
+function htmlQuestao(pre,i,q){
+  var opts='';
+  for(var k=0;k<q.o.length;k++){
+    opts+='<button class="opt" id="'+pre+'_o'+i+'_'+k+'" onclick="responder(\''+pre+'\','+i+','+k+')">'+
+          '<span class="letra">'+LET[k]+')</span> '+q.o[k]+'</button>';
+  }
+  return '<div class="q" id="'+pre+'_q'+i+'">'+
+         '<div class="enun">'+(i+1)+') '+q.q+'</div>'+
+         '<div class="opts">'+opts+'</div>'+
+         '<div id="'+pre+'_fb'+i+'"></div></div>';
+}
+function pintaResposta(pre,i,k,gravar){
+  var q=BANCOS[pre][i];
+  var cx=document.getElementById(pre+'_q'+i);
+  if(!cx||cx.dataset.feito)return;
+  cx.dataset.feito='1';
+  for(var z=0;z<q.o.length;z++){
+    var b=document.getElementById(pre+'_o'+i+'_'+z);
+    if(!b)continue;
+    b.disabled=true;
+    if(z===q.a)b.classList.add('certa');
+  }
+  var ok=(k===q.a);
+  if(!ok){var be=document.getElementById(pre+'_o'+i+'_'+k);if(be)be.classList.add('errada');}
+  var fb=document.getElementById(pre+'_fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Isso! ':'❌ Quase! ')+q.e;
+  if(gravar){mem[pre+'_'+i]={k:k,ok:ok};salvar();}
+}
+function responder(pre,i,k){
+  pintaResposta(pre,i,k,true);
+  if(pre==='termo')termoCheck();
+  if(pre.indexOf('tr')===0)treinoCheck();
+}
+
+/* ===================== BALANÇA ===================== */
+function montarTermo(){
+  BANCOS['termo']=TERMO;
+  var h='';
+  for(var i=0;i<TERMO.length;i++)h+=htmlQuestao('termo',i,TERMO[i]);
+  h+='<div class="center" style="margin-top:16px"><button class="btn sol" onclick="termoResultado()">⚖️ Ver a pesagem</button></div>';
+  document.getElementById('termoBox').innerHTML=h;
+  for(var j=0;j<TERMO.length;j++){
+    var s=mem['termo_'+j];
+    if(s)pintaResposta('termo',j,s.k,false);
+  }
+  termoCheck();
+}
+function termoCheck(){
+  var n=0;
+  for(var i=0;i<TERMO.length;i++)if(mem['termo_'+i])n++;
+  if(n===TERMO.length)termoResultado(true);
+}
+function nomeAssunto(id){
+  for(var i=0;i<ASSUNTOS.length;i++)if(ASSUNTOS[i].id===id)return ASSUNTOS[i].nome;
+  return id;
+}
+function termoResultado(auto){
+  var falta=[],fracos=[],fortes=[];
+  for(var i=0;i<TERMO.length;i++){
+    var s=mem['termo_'+i];
+    if(!s){falta.push(i+1);continue;}
+    var nome=nomeAssunto(TERMO[i].as);
+    if(s.ok)fortes.push(nome);else fracos.push(nome);
+  }
+  var box=document.getElementById('termoRes');
+  box.classList.add('on');
+  if(falta.length&&!auto){
+    box.innerHTML='<h2>⚖️ Falta responder</h2><p>Ainda faltam as questões: <b>'+falta.join(', ')+'</b>. Responda todas para eu fechar a pesagem!</p>';
+    return;
+  }
+  if(falta.length)return;
+  var h='<h2>♻️ Relatório de carga da sua prova</h2>';
+  h+='<p>Você acertou <b>'+fortes.length+' de '+TERMO.length+'</b> assuntos.</p>';
+  h+='<div class="barra"><div style="width:'+Math.round(fortes.length/TERMO.length*100)+'%"></div></div>';
+  if(fracos.length){
+    h+='<h3>⚠️ Comece por estes — ficaram na esteira</h3>';
+    for(var f=0;f<fracos.length;f++)h+='<div class="termo-linha"><span class="nome">'+fracos[f]+'</span><span class="tag at">estudar primeiro</span></div>';
+    h+='<p style="margin-top:12px"><b>Seu caminho de hoje:</b> abra a aba <b>🗺️ Guia da Usina</b> e leia primeiro as pílulas marcadas com ⚠️. Depois vá à <b>🚨 Sirene</b>, ao <b>🏭 Pátio de Treino</b> e termine no <b>🚚 Carregamento Final</b>.</p>';
+  } else {
+    h+='<div class="fb ok"><b>Carga toda separada!</b> ♻️ Você acertou os '+TERMO.length+'. Então hoje o melhor é treinar: vá direto à <b>🚨 Sirene</b> (as pegadinhas derrubam quem sabe a matéria) e depois ao <b>🚚 Carregamento Final</b>.</div>';
+  }
+  if(fortes.length){
+    h+='<h3>✅ Já está firme nestes</h3>';
+    for(var g=0;g<fortes.length;g++)h+='<div class="termo-linha"><span class="nome">'+fortes[g]+'</span><span class="tag ok">só dar uma olhada</span></div>';
+  }
+  box.innerHTML=h;
+  mem.termo_fracos=fracos;
+  salvar();
+  montarGuia();
+}
+
+/* ===================== GUIA ===================== */
+function montarGuia(){
+  var fracos=mem.termo_fracos||[];
+  var h='';
+  for(var i=0;i<GUIA.length;i++){
+    var p=GUIA[i];
+    if(p.g){h+='<div class="grupo">'+p.g+'</div>';continue;}
+    var alerta=(fracos.indexOf(nomeAssunto(p.as))>=0);
+    h+='<div class="pill card"'+(alerta?' style="border-color:#E05A2B"':'')+'>'+
+       '<div class="tema">'+p.em+' '+p.t+(alerta?' <span class="tag at">⚠️ estude primeiro</span>':'')+'</div>'+
+       '<div class="regra">'+p.r+'</div>'+
+       '<div class="ex">📌 <b>Exemplos:</b> '+p.ex+'</div>'+
+       '<div class="prova">🎯 <b>Como costuma cair na prova:</b> '+p.p+'</div>'+
+       '</div>';
+  }
+  document.getElementById('guiaBox').innerHTML=h;
+}
+
+/* ===================== SIRENE (cartões) ===================== */
+function montarFlip(){
+  var h='';
+  for(var i=0;i<PEGADINHAS.length;i++){
+    h+='<div class="flip" onclick="this.classList.toggle(\'v\')">'+
+       '<div class="in"><div class="f">⚠️ '+PEGADINHAS[i].f+'<small>clique para virar</small></div>'+
+       '<div class="b">'+PEGADINHAS[i].b+'</div></div></div>';
+  }
+  document.getElementById('flipBox').innerHTML=h;
+}
+
+/* ===================== ESTEIRA ===================== */
+var eOrdem=[],ePos=0,eAcertos=0;
+var ESTEIRA_RODADA=12;
+function esteiraStart(){
+  eOrdem=[];
+  for(var i=0;i<ESTEIRA.length;i++)eOrdem.push(i);
+  for(var j=eOrdem.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=eOrdem[j];eOrdem[j]=eOrdem[k];eOrdem[k]=t;}
+  eOrdem=eOrdem.slice(0,ESTEIRA_RODADA);
+  ePos=0;eAcertos=0;
+  esteiraMostrar();
+}
+function esteiraMostrar(){
+  var box=document.getElementById('esteiraBox');
+  var tot=eOrdem.length;
+  if(ePos>=tot){
+    var msg=(eAcertos===tot)?'🏆 '+tot+' de '+tot+'! Painel limpo — as conversões estão na ponta da língua.':
+            (eAcertos>=tot-2)?'👏 Quase tudo! Rode mais uma vez para fechar.':
+            '💪 Vale rodar de novo — a ordem muda e a repetição é o que fixa as conversões.';
+    box.innerHTML='<div class="fb ok"><b>Rodada terminada:</b> '+eAcertos+' de '+tot+' certas.<br>'+msg+'</div>';
+    document.getElementById('esteiraPlacar').textContent='';
+    var melhor=mem.esteira_melhor||0;
+    if(eAcertos>melhor){mem.esteira_melhor=eAcertos;salvar();}
+    return;
+  }
+  var it=ESTEIRA[eOrdem[ePos]];
+  var ops='';
+  for(var k=0;k<it.o.length;k++)ops+='<button class="btn ghost" onclick="esteiraResp('+k+')">'+it.o[k]+'</button>';
+  box.innerHTML='<div class="frase">'+it.f+'</div><div class="escolhas">'+ops+'</div><div id="esteiraFb"></div>';
+  document.getElementById('esteiraPlacar').textContent='Rodada '+(ePos+1)+' de '+tot+' · acertos: '+eAcertos;
+}
+function esteiraResp(k){
+  var it=ESTEIRA[eOrdem[ePos]];
+  var ok=(k===it.a);
+  if(ok)eAcertos++;
+  var fb=document.getElementById('esteiraFb');
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=(ok?'✅ Certo! ':'❌ A certa era <b>'+it.o[it.a]+'</b>. ')+it.e;
+  var bts=document.querySelectorAll('#esteiraBox .escolhas button');
+  for(var i=0;i<bts.length;i++)bts[i].disabled=true;
+  ePos++;
+  setTimeout(esteiraMostrar,1800);
+}
+
+/* ===================== TREINO ===================== */
+function montarTreino(){
+  var h='';
+  for(var f=0;f<TREINO.length;f++){
+    var pre='tr'+f;
+    BANCOS[pre]=TREINO[f].qs;
+    h+='<div class="card"><h2>'+TREINO[f].em+' '+TREINO[f].fam+'</h2><div id="'+pre+'Box"></div>'+
+       '<div class="placar" id="'+pre+'Placar"></div></div>';
+  }
+  document.getElementById('treinoBox').innerHTML=h;
+  for(var g=0;g<TREINO.length;g++){
+    var p2='tr'+g, hh='';
+    for(var i=0;i<TREINO[g].qs.length;i++){
+      var q=TREINO[g].qs[i];
+      hh+=htmlQuestao(p2,i,q).replace('</div><div class="opts">',
+          ' <span class="nivel '+q.n+'">'+(q.n==='f'?'fácil':q.n==='m'?'médio':'nível prova')+'</span></div><div class="opts">');
+    }
+    document.getElementById(p2+'Box').innerHTML=hh;
+    for(var r=0;r<TREINO[g].qs.length;r++){
+      var s=mem[p2+'_'+r];
+      if(s)pintaResposta(p2,r,s.k,false);
+    }
+  }
+  treinoCheck();
+}
+function treinoCheck(){
+  for(var f=0;f<TREINO.length;f++){
+    var pre='tr'+f,tot=TREINO[f].qs.length,fez=0,ac=0;
+    for(var i=0;i<tot;i++){var s=mem[pre+'_'+i];if(s){fez++;if(s.ok)ac++;}}
+    var el=document.getElementById(pre+'Placar');
+    if(el)el.textContent=fez?('Respondidas: '+fez+'/'+tot+' · acertos: '+ac):'';
+  }
+}
+
+/* ===================== SIMULADO ===================== */
+var simEscolhas={};
+function montarSim(){
+  var h='';
+  for(var i=0;i<SIMULADO.length;i++){
+    var q=SIMULADO[i],ops='';
+    for(var k=0;k<q.o.length;k++){
+      ops+='<button class="opt" id="sim_o'+i+'_'+k+'" onclick="simMarcar('+i+','+k+')">'+
+           '<span class="letra">'+LET[k]+')</span> '+q.o[k]+'</button>';
+    }
+    h+='<div class="q" id="sim_q'+i+'"><div class="enun">'+(i+1)+') '+q.q+'</div>'+
+       '<div class="opts">'+ops+'</div><div id="sim_fb'+i+'"></div></div>';
+  }
+  document.getElementById('simBox').innerHTML=h;
+  var sv=mem.sim_escolhas;
+  if(sv){simEscolhas=sv;for(var j in simEscolhas)marcarVisual(parseInt(j,10),simEscolhas[j]);}
+  if(mem.sim_enviado)simMostrarGabarito();
+}
+function marcarVisual(i,k){
+  for(var z=0;z<SIMULADO[i].o.length;z++){
+    var b=document.getElementById('sim_o'+i+'_'+z);
+    if(!b)continue;
+    b.style.borderColor=(z===k)?'#2E7D52':'';
+    b.style.background=(z===k)?'#E3F5EA':'';
+  }
+}
+function simMarcar(i,k){
+  if(mem.sim_enviado)return;
+  simEscolhas[i]=k;
+  mem.sim_escolhas=simEscolhas;
+  salvar();
+  marcarVisual(i,k);
+}
+function simEnviar(){
+  var falta=[];
+  for(var i=0;i<SIMULADO.length;i++)if(simEscolhas[i]===undefined)falta.push(i+1);
+  var box=document.getElementById('simRes');
+  box.classList.add('on');
+  if(falta.length){
+    box.innerHTML='<h2>🚚 Ainda falta marcar</h2><p>Faltam as questões: <b>'+falta.join(', ')+'</b>. Marque todas antes de carregar.</p>';
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+    return;
+  }
+  mem.sim_enviado=1;
+  salvar();
+  simMostrarGabarito();
+}
+function simMostrarGabarito(){
+  var ac=0;
+  for(var i=0;i<SIMULADO.length;i++){
+    var q=SIMULADO[i],esc=simEscolhas[i];
+    for(var z=0;z<q.o.length;z++){
+      var b=document.getElementById('sim_o'+i+'_'+z);
+      if(!b)continue;
+      b.disabled=true;b.style.borderColor='';b.style.background='';
+      if(z===q.a)b.classList.add('certa');
+      if(z===esc&&esc!==q.a)b.classList.add('errada');
+    }
+    var ok=(esc===q.a);
+    if(ok)ac++;
+    var fb=document.getElementById('sim_fb'+i);
+    if(fb){fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'✅ Certa! ':'❌ A resposta certa é <b>'+LET[q.a]+')</b> '+q.o[q.a]+'. ')+q.e;}
+  }
+  mem.sim_acertos=ac;salvar();
+  var pc=Math.round(ac/SIMULADO.length*100);
+  var rec=(pc>=90)?'♻️ Caminhão carregado! Você está pronta para a recuperação. Antes de dormir, só vire os cartões da Sirene uma vez.':
+          (pc>=70)?'🚚 Quase tudo carregado. Volte ao Guia da Usina nos assuntos que você errou aqui e rode o Painel de novo.':
+          (pc>=50)?'🏭 Ainda tem carga na esteira. Releia as pílulas dos assuntos errados e refaça o Treino dessas famílias.':
+          '🧰 Calma, dá tempo. Escolha os 4 assuntos que você mais errou, leia só as pílulas deles e rode o Painel duas vezes.';
+  var box=document.getElementById('simRes');
+  box.innerHTML='<h2>🚚 Sua nota de carga</h2><p style="font-size:1.3rem"><b>'+ac+' de '+SIMULADO.length+'</b> ('+pc+'%)</p>'+
+    '<div class="barra"><div style="width:'+pc+'%"></div></div><div class="fb ok">'+rec+'</div>'+
+    '<p class="aviso">O gabarito comentado de cada questão está acima, junto da pergunta.</p>';
+  document.getElementById('simBtn').style.display='none';
+  window.scrollTo({top:document.getElementById('simRes').offsetTop-40,behavior:'smooth'});
+}
+
+/* ===================== RELATÓRIO DOS PAIS ===================== */
+function verRelatorio(){
+  var cod=(document.getElementById('codPais').value||'').trim().toUpperCase();
+  var box=document.getElementById('relBox');
+  if(cod!=='PAIS-77'){
+    box.innerHTML='<div class="fb no">Código incorreto. Peça o código a quem montou o kit.</div>';
+    return;
+  }
+  var tFez=0,tAc=0;
+  for(var i=0;i<TERMO.length;i++){var s=mem['termo_'+i];if(s){tFez++;if(s.ok)tAc++;}}
+  var h='<div class="fb ok"><b>Relatório liberado.</b></div><table><tr><th>Parte</th><th>Situação</th></tr>';
+  h+='<tr><td>⚖️ Balança</td><td>'+(tFez?tAc+' de '+tFez+' respondidas corretas'+(tFez<TERMO.length?' (incompleto: '+tFez+'/'+TERMO.length+')':''):'não começou')+'</td></tr>';
+  var fr=mem.termo_fracos;
+  h+='<tr><td>⚠️ Assuntos a reforçar</td><td>'+(fr&&fr.length?fr.join(' · '):(fr?'nenhum — acertou todos':'depende da Balança'))+'</td></tr>';
+  h+='<tr><td>📡 Painel das Conversões</td><td>'+(mem.esteira_melhor!==undefined?'melhor rodada: '+mem.esteira_melhor+' de '+ESTEIRA_RODADA:'não jogou')+'</td></tr>';
+  for(var f=0;f<TREINO.length;f++){
+    var pre='tr'+f,tot=TREINO[f].qs.length,fez=0,ac=0;
+    for(var j=0;j<tot;j++){var s2=mem[pre+'_'+j];if(s2){fez++;if(s2.ok)ac++;}}
+    h+='<tr><td>🏭 Treino: '+TREINO[f].fam+'</td><td>'+(fez?ac+' certas de '+fez+' feitas (de '+tot+')':'não fez')+'</td></tr>';
+  }
+  h+='<tr><td>🚚 Carregamento Final</td><td>'+(mem.sim_enviado?mem.sim_acertos+' de '+SIMULADO.length+' ('+Math.round(mem.sim_acertos/SIMULADO.length*100)+'%)':'não enviou')+'</td></tr>';
+  h+='</table><p class="aviso" style="margin-top:10px">Dica para a véspera: priorize os assuntos da linha “a reforçar” e refaça o Painel — as conversões de unidade e a vírgula no lugar errado são os erros que mais custam nota.</p>';
+  box.innerHTML=h;
+}
+
+/* ===================== INICIAR ===================== */
+montarTermo();
+montarGuia();
+montarFlip();
+montarTreino();
+montarSim();
+esteiraStart();
+</script>
+</body>
+</html>
